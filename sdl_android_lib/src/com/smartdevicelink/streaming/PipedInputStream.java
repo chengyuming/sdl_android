@@ -127,11 +127,9 @@ public class PipedInputStream extends InputStream {
     private void checkStateForReceive() throws IOException {
         if (!this.connected) {
             throw new IOException("Pipe not connected");
-        }
-        if (this.closedByWriter || this.closedByReader) {
+        }else if ((this.closedByWriter) || (this.closedByReader)) {
             throw new IOException("Pipe closed");
-        }
-        if (this.readSide != null && !this.readSide.isAlive()) {
+        }else if ((this.readSide != null) && (!this.readSide.isAlive())) {
             throw new IOException("Read end dead");
         }
     }
@@ -164,7 +162,7 @@ public class PipedInputStream extends InputStream {
             throw new IOException("Pipe not connected");
         }else if (this.closedByReader) {
             throw new IOException("Pipe closed");
-        }else if (this.writeSide != null && !this.writeSide.isAlive() && !this.closedByWriter && this.in < 0) {
+        }else if ((this.writeSide != null) && (!this.writeSide.isAlive()) && (!this.closedByWriter) && (this.in < 0)) {
             throw new IOException("Write end dead");
         }
         this.readSide = Thread.currentThread();
@@ -177,7 +175,7 @@ public class PipedInputStream extends InputStream {
             if (this.closedByWriter) {
                 return -1;
             }
-            if (this.writeSide != null && !this.writeSide.isAlive()) {
+            if ((this.writeSide != null) && (!this.writeSide.isAlive())) {
                 testCount--;
                 if (testCount < 0) {
                     throw new IOException("Pipe broken");
@@ -212,10 +210,9 @@ public class PipedInputStream extends InputStream {
     public synchronized int read(byte[] bytes, int byteOffset, int byteCount) throws IOException {
         if (bytes == null) {
             throw new NullPointerException();
-        }else if (byteOffset < 0 || byteCount < 0 || byteCount > bytes.length - byteOffset) {
+        }else if ((byteOffset < 0) || (byteCount < 0) || (byteCount > bytes.length - byteOffset)) {
             throw new IndexOutOfBoundsException();
-        }
-        if (byteCount == 0) {
+        }else if (byteCount == 0) {
             return 0;
         }
         int oneByte = read();
@@ -257,14 +254,13 @@ public class PipedInputStream extends InputStream {
     public synchronized int available() throws IOException {
         if (this.in < 0) {
             return 0;
-        }
-        if (this.in == this.out) {
+        }else if (this.in == this.out) {
             return this.buffer.length;
-        }
-        if (this.in > this.out) {
+        }else if (this.in > this.out) {
             return this.in - this.out;
+        }else {
+            return this.in + this.buffer.length - this.out;
         }
-        return this.in + this.buffer.length - this.out;
     }
 
     /**

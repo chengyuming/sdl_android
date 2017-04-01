@@ -29,8 +29,7 @@ public class PipedOutputStream extends OutputStream {
     public synchronized void connect(PipedInputStream in) throws IOException {
         if (in == null) {
             throw new NullPointerException();
-        }
-        if (this.sink != null || in.connected) {
+        }else if ((this.sink != null) || (in.connected)) {
             throw new IOException("Already connected");
         }
         this.sink = in;
@@ -61,14 +60,12 @@ public class PipedOutputStream extends OutputStream {
     public void write(byte[] bytes, int byteOffset, int byteCount) throws IOException {
         if (this.sink == null) {
             throw new IOException("Pipe not connected");
-        }
-        if (bytes == null) {
+        }else if (bytes == null) {
             throw new NullPointerException();
-        }
-        if (byteOffset < 0 || byteOffset > bytes.length || byteCount < 0 || byteOffset + byteCount > bytes.length || byteOffset + byteCount < 0) {
+        }else if ((byteOffset < 0) || (byteOffset > bytes.length) || (byteCount < 0)
+                || (byteOffset + byteCount > bytes.length) || (byteOffset + byteCount < 0)) {
             throw new IndexOutOfBoundsException();
-        }
-        if (byteCount == 0) {
+        }else if (byteCount == 0) {
             return;
         }
         this.sink.receive(bytes, byteOffset, byteCount);
