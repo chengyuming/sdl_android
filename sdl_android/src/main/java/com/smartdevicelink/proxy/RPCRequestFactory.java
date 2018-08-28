@@ -240,7 +240,7 @@ public class RPCRequestFactory {
 		msg.setPlayTone(playTone);
 		msg.setTtsChunks(ttsChunks);
 		msg.setSoftButtons(softButtons);
-
+		msg.setAlertIcon(icon);
 		return msg;
 	}	
 	

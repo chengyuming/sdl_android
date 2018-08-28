@@ -123,6 +123,30 @@ public class Alert extends RPCRequest {
     public static final String KEY_PROGRESS_INDICATOR = "progressIndicator";
 	public static final String KEY_TTS_CHUNKS = "ttsChunks";
 	public static final String KEY_SOFT_BUTTONS = "softButtons";
+	public static final String KEY_ICON = "alertIcon";
+	
+	/**
+	 * <p>Sets the Image
+	 * If provided, defines the image to be shown along with an alert</p>
+	 * @param alertIcon
+	 *            <p>an Image obj representing the Image obj shown along with an
+	 *            alert</p>
+	 *            <p>
+	 *            <b>Notes: </b>If omitted on supported displays, no (or the
+	 *            default if applicable) icon will be displayed</p>
+	 */
+	public void setAlertIcon(Image alertIcon) {
+		setParameters(KEY_ICON, alertIcon);
+	}
+
+	/**
+	 * <p>Gets the image to be shown along with an alert </p>
+	 *
+	 * @return Image -an Image object
+	 */
+	public Image getAlertIcon() {
+		return (Image) getObject(Image.class, KEY_ICON);
+	}
 
 	/**
 	 * Constructs a new Alert object

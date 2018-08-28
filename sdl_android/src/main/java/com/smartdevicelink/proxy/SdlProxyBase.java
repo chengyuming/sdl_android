@@ -4892,7 +4892,7 @@ public abstract class SdlProxyBase<proxyListenerType extends IProxyListenerBase>
 	 */
 	public void alert(Vector<TTSChunk> ttsChunks,
 			String alertText1, String alertText2, String alertText3, Boolean playTone,
-			Integer duration, Vector<SoftButton> softButtons, Integer correlationID) throws SdlException {
+			Integer duration, Vector<SoftButton> softButtons, Integer correlationID,Image icon) throws SdlException {
 
 		Alert msg = new Alert();
 		msg.setCorrelationID(correlationID);
@@ -4903,6 +4903,7 @@ public abstract class SdlProxyBase<proxyListenerType extends IProxyListenerBase>
 		msg.setPlayTone(playTone);
 		msg.setTtsChunks(ttsChunks);
 		msg.setSoftButtons(softButtons);
+		msg.setAlertIcon(icon);
 
 		sendRPCRequest(msg);
 	}
